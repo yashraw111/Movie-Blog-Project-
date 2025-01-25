@@ -3,39 +3,28 @@ const admin = require('../model/adminModel')
 const ViewBlog = require('../model/blog.model')
 const { accessPage } = require('../utils/accessPage')
 
-router.get("/",async(req,res)=>{
+router.get("/",(req,res)=>{
     // res.render("pages/index")
-    const cookieAdmin = req.cookies.admin
-    // console.log(cookieAdmin);
-    const email = cookieAdmin.email
-    const SingleAdmin= await admin.findOne({email})
-    accessPage(req,res,"pages/index",{admin:SingleAdmin})
-    
+    accessPage(req,res,"pages/index")
 })
-router.get('/AddBlog',async(req,res)=>{
+router.get('/AddBlog',(req,res)=>{
     // res.render('pages/addBlog')
-    const cookieAdmin = req.cookies.admin
-    // console.log(cookieAdmin);
-    const email = cookieAdmin.email
-    const SingleAdmin= await admin.findOne({email})
-    accessPage(req,res,"pages/addBlog",{admin:SingleAdmin})
+    accessPage(req,res,"pages/addBlog")
+
+
 })
 router.get('/ViewBlog',async(req,res)=>{
     const ViewBlogs =await ViewBlog.find()
-    const cookieAdmin = req.cookies.admin
-    // console.log(cookieAdmin);
-    const email = cookieAdmin.email
-    const SingleAdmin= await admin.findOne({email})
     // console.log(ViewBlogs);
-    accessPage(req,res,'pages/viewBlogs',{ViewBlogs,admin:SingleAdmin})
     
-    // res.render('pages/viewBlogs',{ViewBlogs})
+    res.render('pages/viewBlogs',{ViewBlogs})
 })
 router.get('/Update',async(req,res)=>{
     const {id}= req.query
     // console.log(id);
     const singleBlog = await ViewBlog.findById(id)
     // console.log(singleBlog);
+    
     res.render('pages/UpdateBlog',{singleBlog})
 
 })
@@ -57,7 +46,6 @@ router.get('/profile',async(req,res)=>{
     const SingleAdmin= await admin.findOne({email})
 
     res.render("pages/AdminProfile",{admin:SingleAdmin})
-    // res.render("layout/header",{admin:SingleAdmin})
 
 })
 router.get("/changePass",async(req,res)=>{
@@ -66,8 +54,5 @@ router.get("/changePass",async(req,res)=>{
     // console.log(email);
     
     res.render("pages/changePassword",email)
-})
-router.get("",async(req,res)=>{
-
 })
 module.exports = router
