@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<%- include('../layout/headSection') %>
+
+  <body>
+    <div class="preloader">
+      <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+      </div>
+    </div>
+    <div id="main-wrapper">
+      <%- include('../layout/header') %>
+        <%- include('../layout/sidebar') %>
+
+
+          <div class="page-wrapper">
+            <div class="page-breadcrumb">
+              <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                  <h3 class="page-title"> my profile</h3>  
+                  <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                          my profile
+                        </li>
+                      </ol>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center w-100">
+              <img src="images/<%= admin.profile_image %>" alt="" width="100">
+
+            </div>
+            <form class="form-horizontal" method="post" action="admin/profileUpdate" enctype="multipart/form-data">
+              <div class="card-body">
+                <!-- <h4 class="card-title">My Profile</h4> -->
+                <div class="form-group row">
+                  <label for="category" class="col-sm-3 text-right control-label col-form-label">UserName</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="category" placeholder="Enter the category" name="username"   value="<%= admin.username %>" required>
+                  </div>
+                </div>
+            
+                <div class="form-group row">
+                  <label for="title" class="col-sm-3 text-right control-label col-form-label">Title</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control border-dark" id="title" placeholder="Enter the title" name="email"    value="<%= admin.email %>"
+                    disabled>
+                  </div>
+                </div>
+                <input type="hidden" value="<%= admin.email %>" name="email">
+                <div class="form-group row">
+                  <label for="publishDate" class="col-sm-3 text-right control-label col-form-label">Movie poster</label>
+                  <div class="col-sm-9">
+                    <input type="file" class="form-control" id="publishDate" name="profile_image">
+                  </div>
+                </div>
+
+
+              </div>
+            
+              <div class="card-body">
+                <button class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+            
+            <footer class="footer text-center">
+              All Rights Reserved by Matrix-admin. Designed and Developed by
+              <a href="https://wrappixel.com">WrapPixel</a>.
+            </footer>
+          </div>
+    </div>
+
+    <%- include('../layout/jsLink') %>
+  </body>
+
+</html>

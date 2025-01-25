@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <%- include('../layout/headSection') %>
+
+  <body>
+    <div class="preloader">
+      <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+      </div>
+    </div>
+    <div id="main-wrapper">
+      <%- include('../layout/header') %> <%- include('../layout/sidebar') %>
+
+      <div class="page-wrapper">
+        <div class="page-breadcrumb">
+          <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+              <h4 class="page-title">View All Blogs</h4>
+              <div class="ml-auto text-right">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      View Blogs
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header bg-primary text-white">
+                  <h5 class="mb-0">Blog List</h5>
+                </div>
+                <table class="table table-active table-bordered table-hover table-dark ">
+                  <thead class="">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Author </th>
+                      <th scope="col">image</th>
+                      <th scope="col">Date</th>
+                      
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% ViewBlogs.forEach((ele,index)=>{ %> 
+                      <tr>
+                        <td><%= index+1 %></td>
+                        <td><%= ele.category %></td>
+                        <td><%= ele.title %></td>
+                        <td><%= ele.author %></td>
+                        <td>
+                        <img src="images/<%= ele.MoviePoster %>" alt="" width="100">
+                        </td>
+                        <td><%= ele.publishDate %></td>
+                        <td>
+                            <a href="blog/delete/<%= ele._id %>" class="btn btn-outline-danger">delete</a>
+                            <a href="/Update?id=<%= ele._id %>" class="btn btn-outline-warning">Update</a>
+                          </td>
+                        
+                      </tr>
+                      <% }) %>
+                  
+                  </tbody>
+                 
+                </table>
+              </div>
+                <!-- <div class="card-body">
+                  <h5 class="card-title m-b-0">Static Table With Checkboxes</h5>
+                </div> -->
+               
+              </div>
+            </div>
+          </div>
+        <footer class="footer text-center">
+          All Rights Reserved by Matrix-admin. Designed and Developed by
+          <a href="https://wrappixel.com">WrapPixel</a>.
+        </footer>
+      </div>
+    </div>
+
+    <%- include('../layout/jsLink') %>
+  </body>
+</html>

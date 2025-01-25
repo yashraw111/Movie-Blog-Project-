@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<%- include('../layout/headSection') %>
+
+  <body>
+    <div class="preloader">
+      <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+      </div>
+    </div>
+    <div id="main-wrapper">
+      <%- include('../layout/header') %>
+        <%- include('../layout/sidebar') %>
+
+
+          <div class="page-wrapper">
+            <div class="page-breadcrumb">
+              <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                  <h4 class="page-title">Create Movie Blog</h4>
+                  <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                          create blog
+                        </li>
+                      </ol>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="container-fluid">
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <div class="card">
+                    <div class="card-header bg-primary text-white">
+                      <h5 class="card-title mb-0">Blog Details</h5>
+                    </div>
+                    <form class="form-horizontal" method="post" action="blog/CreateBlog" enctype="multipart/form-data">
+                      <div class="card-body">
+                        <div class="form-group row">
+                          <label for="category" class="col-sm-3 text-right control-label col-form-label">Category</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="category" placeholder="Enter the category" name="category" required>
+                          </div>
+                        </div>
+      
+                        <div class="form-group row">
+                          <label for="title" class="col-sm-3 text-right control-label col-form-label">Title</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="title" placeholder="Enter the title" name="title" required>
+                          </div>
+                        </div>
+      
+                        <div class="form-group row">
+                          <label for="description" class="col-sm-3 text-right control-label col-form-label">Description</label>
+                          <div class="col-sm-9">
+                            <textarea class="form-control" id="description" placeholder="Enter the blog description" name="description" rows="4" required></textarea>
+                          </div>
+                        </div>
+      
+                        <div class="form-group row">
+                          <label for="author" class="col-sm-3 text-right control-label col-form-label">Author</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="author" placeholder="Enter the author's name" name="author" required>
+                          </div>
+                        </div>
+      
+                        <div class="form-group row">
+                          <label for="publishDate" class="col-sm-3 text-right control-label col-form-label">Publish Date</label>
+                          <div class="col-sm-9">
+                            <input type="date" class="form-control" id="publishDate" name="publishDate">
+                          </div>
+                        </div>
+      
+                        <div class="form-group row">
+                          <label for="MoviePoster" class="col-sm-3 text-right control-label col-form-label">Movie Poster</label>
+                          <div class="col-sm-9">
+                            <input type="file" class="form-control" id="MoviePoster" name="MoviePoster">
+                          </div>
+                        </div>
+                      </div>
+      
+                      <div class="card-footer text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <footer class="footer text-center">
+              All Rights Reserved by Matrix-admin. Designed and Developed by
+              <a href="https://wrappixel.com">WrapPixel</a>.
+            </footer>
+          </div>
+    </div>
+
+    <%- include('../layout/jsLink') %>
+  </body>
+
+</html>
