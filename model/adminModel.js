@@ -13,7 +13,8 @@ const Admin = new Schema({
         ...common,
         // type:
     },
-    profile_image:String
+    profile_image:String,
+    token:String
 },{timestamps:true})
 
 const admin = model('Admin',Admin)

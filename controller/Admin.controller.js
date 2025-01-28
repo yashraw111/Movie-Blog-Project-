@@ -9,7 +9,6 @@ exports.createUser = async(req,res)=>{
 
  try {
        const {username,email,password}=req.body
-
        const existEmail = await AdminUser.findOne({email})
        if(existEmail){
         res.json("email already exist")
@@ -17,18 +16,13 @@ exports.createUser = async(req,res)=>{
        else{
         req.flash("info", "your registration successfully");
         const hashPass =await plainToHash(password)
-        // console.log(hashPass);
-        
            const user = await AdminUser.create({username,email,password:hashPass})
            res.redirect('/login')
        }
    
  } catch (error) {
-    console.log(error);
-    
-    
+    res.json(error);
  }
-
 }
 
 exports.loginUser = async(req,res)=>{
@@ -77,13 +71,11 @@ exports.updateProfile = async(req,res)=>{
     }
 }
 
-exports.ForgotPass = async(req,res)=>{
-    // console.log(req.body);
+exports.updatePassword = async(req,res)=>{
     const {email}= req.body
     const existEmail = await AdminUser.findOne({email}).countDocuments().exec()
 
-    // console.log(existEmail);
-
+    
     if(existEmail > 0){
         var otp = otpGenerator.generate(6,{upperCaseAlphabets:true,specialChars:true})
         const htmlContent = `
@@ -100,9 +92,12 @@ exports.ForgotPass = async(req,res)=>{
             <p style="font-size: 12px; color: #888; text-align: center;">If you have any issues, contact us at <a href="mailto:support@yourcompany.com" style="color: #4CAF50;">support@yourcompany.com</a>.</p>
         </div>
     `;
+    const admin = await AdminUser.updateOne({email:email},{
+        token:otp
+    })
         await sendEmail(email,"forgot password",htmlContent)
         req.flash("info","check your email")
-        res.redirect("/login")
+        res.redirect("/forgotPassword")
     }
     else{
         req.flash("info","email is not Exist")
@@ -144,4 +139,33 @@ exports.changePassword =  async(req,res)=>{
         res.json("email is not Exist")
     }
     
+}
+
+exports.forgotPassword = async(req,res)=>{
+    // console.log(req.body)
+    const{token,password,confirmPassword} = req.body
+
+    const existToken = await AdminUser.findOne({token}).countDocuments().exec()
+
+    if(existToken){
+        if(password === confirmPassword){
+            const hash_pass = await plainToHash(password)
+            const admin = await AdminUser.findOne({token})
+
+            await AdminUser.findByIdAndUpdate({_id:admin._id},{password:hash_pass,token:""})
+            
+            req.flash("info","password change successfully")
+            res.redirect('/login')
+        }
+        else{
+            req.flash("info","password in not match")
+        res.redirect("/forgotPassword")
+        }
+    }
+    else{
+        req.flash("info","token is not valid")
+        res.redirect("/forgotPassword")
+    }
+
+
 }

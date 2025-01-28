@@ -44,7 +44,12 @@
                         <div class="form-group row">
                           <label for="category" class="col-sm-3 text-right control-label col-form-label">Category</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" id="category" placeholder="Enter the category" name="category" required>
+                            <select name="category" class="form-control" id="">
+                              <option value="">Select Category</option>
+                              <% categories.forEach(category => { %>
+                                <option value="<%= category.cat_name %>"><%= category.cat_name %></option>
+                              <% }); %>
+                            </select>
                           </div>
                         </div>
       

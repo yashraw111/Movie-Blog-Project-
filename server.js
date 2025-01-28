@@ -15,7 +15,7 @@ const View = require('./routes/view_routes')
 const BlogRoutes = require('./routes/blog.routes')
 // app.get('/', (req, res) => res.send('Hello World!'))
 const adminRoutes = require('./routes/admin.routes')
-
+const CategoryRoutes = require('./routes/category.routes')
 app.use(session({
     secret:"keyboard cat ",
     resave:false,
@@ -27,4 +27,5 @@ app.use(cookieParser())
 app.use('/admin',adminRoutes)
 app.use('/',View)
 app.use('/blog',BlogRoutes)
+app.use('/category',CategoryRoutes)
 app.listen(PORT, () => console.log(`Example app listening on port http://localhost:${PORT}`))
