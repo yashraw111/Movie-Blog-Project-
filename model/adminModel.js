@@ -11,6 +11,7 @@ const Admin = new Schema({
     email:common,
     password:{
         ...common,
+        unique:false
         // type:
     },
     profile_image:String,
